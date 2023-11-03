@@ -1,0 +1,14 @@
+@keyframes rotateArrow {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    30% {
+        transform: rotate(180deg);
+    }
+}
+
+.arrow {
+    transition: transform 200ms;
+    transform-origin: 205px 205px;
+    animation: rotateArrow 4.5s none;
+}
