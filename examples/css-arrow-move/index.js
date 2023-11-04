@@ -1,4 +1,4 @@
-document.addEventListener('click', () => {
+document.querySelector('.button').addEventListener('click', () => {
   const arrowElement = document.querySelector('#arrow');
 
   arrowElement.classList.remove('arrow');
