@@ -1,55 +1,41 @@
 document.querySelector('.button').addEventListener('click', () => {
-  let direction = 1;
-  let value = 0, maxValue = 450, step = 11, acceleration = 0.5;
-  let fillIntervalId;
+  const arrowElement = document.querySelector('#arrow');
   const progressBarElement = document.querySelector('#progress-bar');
 
-  const fillProgressBar = () => {
+  let direction = 1;
+  let value = 0, maxValue = 450, step = 11, acceleration = 0.5;
+  let angle = 0, maxAngle = 180, speed = 1;
+
+  const updateAnimations = () => {
     value += step * direction;
 
-    if (value < maxValue && direction === 1) {
+    if (value > maxValue) {
+      direction = -1;
+      step = 1;
+    }
+    if (value <= 0) {
+      value = 0;
+    } else {
       step += acceleration;
     }
 
-    if (value > maxValue && direction === 1) {
+    angle += speed * direction;
+
+    if (angle > maxAngle) {
       direction = -1;
-      step = 13;
-    }
-
-    if (value <= 0) {
-      clearInterval(fillIntervalId);
-      value = 0;
-    }
-
-    progressBarElement.setAttribute('stroke-dasharray', `${value}, 20000`);
-  }
-
-  fillIntervalId = setInterval(fillProgressBar, 50);
-
-  let direction2 = 1;
-  let angle = 0, maxAngle = 180, speed = 1, acceleration2 = 0.5;
-  let rotationIntervalId;
-  const arrowElement = document.querySelector('#arrow');
-
-  const rotateArrow = () => {
-    angle += speed * direction2;
-
-    if (angle < maxAngle && direction2 === 1) {
-      speed += acceleration2;
-    }
-
-    if (angle > maxAngle && direction2 === 1) {
-      direction2 = -1;
-      speed = 5;
+      speed = 8;
+    } else {
+      speed += acceleration;
     }
 
     if (angle <= 0) {
-      clearInterval(rotationIntervalId);
       angle = 0;
+      clearInterval(animationIntervalId);
     }
 
+    progressBarElement.setAttribute('stroke-dasharray', `${value}, 20000`);
     arrowElement.setAttribute('transform', `rotate(${angle}, 205, 205)`);
-  }
+  };
 
-  rotationIntervalId = setInterval(rotateArrow, 50);
+  const animationIntervalId = setInterval(updateAnimations, 50);
 });
