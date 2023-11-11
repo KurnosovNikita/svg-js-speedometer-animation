@@ -2,13 +2,13 @@ document.querySelector('.button').addEventListener('click', () => {
   let angle = 0;
   let acceleration = 0.5;
   let maxAngle = 180;
-  let forwardSpeed = 1;
+  let speed = 1;
   let rotationIntervalId;
   const arrowElement = document.querySelector('#arrow');
 
   const rotateArrow = () => {
-    angle += forwardSpeed;
-    forwardSpeed += acceleration;
+    angle += speed;
+    speed += acceleration;
 
     if (angle > maxAngle) {
       clearInterval(rotationIntervalId);

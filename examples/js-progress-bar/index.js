@@ -1,28 +1,35 @@
 document.querySelector('.button').addEventListener('click', () => {
+  let value = 0;
+  let speed = 11;
   let direction = 1;
-  let value = 0, maxValue = 450, step = 11, acceleration = 0.5;
-  let fillIntervalId;
-  const progressBarElement = document.querySelector('#progress-bar');
+  let acceleration = 0.5;
+  const maxValue = 450;
+  let progressIntervalId;
 
-  const fillProgressBar = () => {
-    value += step * direction;
+  const progressEl = document.querySelector('#progress');
+
+  const fillProgress = () => {
+    value += speed * direction;
 
     if (value < maxValue && direction === 1) {
-      step += acceleration;
+      speed += acceleration;
     }
 
     if (value > maxValue && direction === 1) {
       direction = -1;
-      step = 15;
+      speed = 13;
     }
 
     if (value <= 0) {
-      clearInterval(fillIntervalId);
+      clearInterval(progressIntervalId);
       value = 0;
     }
 
-    progressBarElement.setAttribute('stroke-dasharray', `${value}, 20000`);
+    progressEl.setAttribute(
+      'stroke-dasharray',
+      `${value} 900`
+    );
   }
 
-  fillIntervalId = setInterval(fillProgressBar, 50);
+  progressIntervalId = setInterval(fillProgress, 50);
 });

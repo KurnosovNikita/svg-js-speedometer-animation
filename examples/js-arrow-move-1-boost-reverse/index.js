@@ -1,7 +1,11 @@
 document.querySelector('.button').addEventListener('click', () => {
+  let angle = 0;
+  let speed = 1;
   let direction = 1;
-  let angle = 0, maxAngle = 180, speed = 1, acceleration = 0.5;
+  let acceleration = 0.5;
+  const maxAngle = 180;
   let rotationIntervalId;
+
   const arrowElement = document.querySelector('#arrow');
 
   const rotateArrow = () => {
@@ -21,7 +25,10 @@ document.querySelector('.button').addEventListener('click', () => {
       angle = 0;
     }
 
-    arrowElement.setAttribute('transform', `rotate(${angle}, 205, 205)`);
+    arrowElement.setAttribute(
+      'transform',
+      `rotate(${angle}, 205, 205)`
+    );
   }
 
   rotationIntervalId = setInterval(rotateArrow, 50);
